@@ -3,5 +3,5 @@
 {% block title %} Video | {% endblock %}
 
 {% block content %}
-    {{ object }}
+    {{ object.embed_code|safe }}
 {% endblock %}
