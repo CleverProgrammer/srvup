@@ -13,5 +13,12 @@
 {% block content %}
 
     <h1>Hello, how are you doing!?</h1>
+    <h2>Total Videos: {{ number }}</h2>
+    {% for video in videos %}
+        <p>
+        {{ forloop.counter }}. {{ video }}
+        </p>
+    {% endfor %}
+
 
 {% endblock %}
