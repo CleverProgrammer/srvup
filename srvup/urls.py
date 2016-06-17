@@ -20,8 +20,14 @@ from srvup import views
 
 urlpatterns = [
     # url(r'^$', TemplateView.as_view(template_name='base.html'), name='home'),
-    url(r'^$', views.home, name='home'),
     # url(r'^staff/$', views.staff, name='staff'),
-    url(r'^login/$', views.auth_login, name='login'),
+    url(r'^$', views.home, name='home'),
     url(r'^admin/', admin.site.urls),
-    ]
+]
+
+# Auth login/logout
+
+urlpatterns += patterns('',
+    url(r'^login/$', views.auth_login, name='login'),
+    url(r'^logout/$', views.auth_logout, name='logout'),
+)

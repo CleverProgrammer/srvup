@@ -39,5 +39,5 @@ def auth_login(request):
 
 
 def auth_logout(request):
-    pass
-
+    logout(request)
+    return HttpResponseRedirect('/')
