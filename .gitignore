@@ -145,3 +145,4 @@ Session.vim
 tags
 
 # Created by .ignore support plugin (hsz.mobi)
+db.sqlite3
