@@ -16,7 +16,8 @@
     <h2>Total Videos: {{ number }}</h2>
     {% for video in videos %}
         <p>
-        {{ forloop.counter }}. {{ video }}
+        {{ forloop.counter }}. {{ video }} <br>
+        {{ video.embed_code }}
         </p>
     {% endfor %}
 
