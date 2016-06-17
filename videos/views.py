@@ -7,7 +7,6 @@ from .models import Video
 def video_detail(request, id):
     context = {}
     context['object'] = Video.objects.get(id=id)
-    print(context)
     return render(request, 'videos/video_detail.html', context)
 
 
