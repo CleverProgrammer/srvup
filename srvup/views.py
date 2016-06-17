@@ -9,8 +9,8 @@ from videos.models import Video
 
 @login_required
 def home(request):
-    print(request.user)
-    print(request.user.is_authenticated())
+    # print(request.user)
+    # print(request.user.is_authenticated())
     name = 'Rafeh Qazi'
     videos = Video.objects.all()
     embeds = [mark_safe(video.embed_code) for video in videos]
@@ -22,6 +22,10 @@ def home(request):
     }
     return render(request, 'home.html', context)
 
+@login_required(login_url='/staff/login/')
+def staff_home(request):
+    context = {}
+    return render(request, 'home.html', context)
 
 def auth_login(request):
     form = LoginForm(request.POST or None)

@@ -17,10 +17,12 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.views.generic import TemplateView
 from srvup import views
+from videos import views as video_views
 
 urlpatterns = [
     # url(r'^$', TemplateView.as_view(template_name='base.html'), name='home'),
-    # url(r'^staff/$', views.staff, name='staff'),
+    url(r'^staff/$', views.staff_home, name='staff'),
+    url(r'^videos/(?P<id>\d+)/$', video_views.video_detail, name='video_detail'),
     url(r'^$', views.home, name='home'),
     url(r'^admin/', admin.site.urls),
 ]
@@ -28,6 +30,6 @@ urlpatterns = [
 # Auth login/logout
 
 urlpatterns += patterns('',
-    url(r'^login/$', views.auth_login, name='login'),
-    url(r'^logout/$', views.auth_logout, name='logout'),
-)
+                        url(r'^login/$', views.auth_login, name='login'),
+                        url(r'^logout/$', views.auth_logout, name='logout'),
+                        )
