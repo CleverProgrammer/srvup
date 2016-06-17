@@ -1,6 +1,9 @@
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.utils.safestring import mark_safe
+
+from .forms import LoginForm
 from videos.models import Video
 
 
@@ -20,8 +23,21 @@ def home(request):
     return render(request, 'home.html', context)
 
 
-def login(request):
-    context = {
-
-    }
+def auth_login(request):
+    form = LoginForm(request.POST or None)
+    next_url = request.GET.get('next')
+    if form.is_valid():
+        username = form.cleaned_data['username']
+        password = form.cleaned_data['password']
+        # print(username, password)
+        user = authenticate(username=username, password=password)
+        if user:
+            login(request, user)
+            return HttpResponseRedirect(next_url)
+    context = {'form': form}
     return render(request, 'login.html', context)
+
+
+def auth_logout(request):
+    pass
+

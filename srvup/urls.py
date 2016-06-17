@@ -22,6 +22,6 @@ urlpatterns = [
     # url(r'^$', TemplateView.as_view(template_name='base.html'), name='home'),
     url(r'^$', views.home, name='home'),
     # url(r'^staff/$', views.staff, name='staff'),
-    url(r'^login/$', views.login, name='login'),
+    url(r'^login/$', views.auth_login, name='login'),
     url(r'^admin/', admin.site.urls),
     ]
