@@ -15,6 +15,7 @@
     <h2>Total Videos: {{ number }}</h2>
     {% for video in videos %}
         <p>
+            {#            <a href="{% url 'video_detail' id=video.id %}">{{ forloop.counter }}. {{ video }}</a> <br>#}
             <a href="{{ video.get_absolute_url }}">{{ forloop.counter }}. {{ video }}</a> <br>
             {{ video.embed_code|safe }}
         </p>
