@@ -22,6 +22,7 @@ from videos import views as video_views
 urlpatterns = [
     # url(r'^$', TemplateView.as_view(template_name='base.html'), name='home'),
     url(r'^staff/$', views.staff_home, name='staff'),
+    url(r'^videos/$', video_views.video_list, name='video_list'),
     url(r'^videos/(?P<id>\d+)/$', video_views.video_detail, name='video_detail'),
     url(r'^$', views.home, name='home'),
     url(r'^admin/', admin.site.urls),

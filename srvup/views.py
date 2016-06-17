@@ -12,7 +12,7 @@ def home(request):
     # print(request.user)
     # print(request.user.is_authenticated())
     name = 'Rafeh Qazi'
-    videos = Video.objects.all()
+    videos = Video.objects.get_featured()
     embeds = [mark_safe(video.embed_code) for video in videos]
     context = {
         'name'  : name,
