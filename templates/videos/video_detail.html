@@ -2,19 +2,49 @@
 
 {% block title %} Video | {% endblock %}
 
+{#<script>#}
+{#    {% block jquery %}#}
+{#        function update_iframe_size() {#}
+{#            var parent_class = $("iframe").parent().attr("class");#}
+{#            console.log(parent_class);#}
+{#            var width = $('iframe').css('width');#}
+{#            var height = $('iframe').css('height');#}
+{#            var ratio = parseInt(height) / parseInt(width);#}
+{#            // console.log(height);#}
+{#            // console.log(width);#}
+{#        }#}
+{##}
+{#        $(window).bind('resize', function () {#}
+{#            update_iframe_size();#}
+{#        });#}
+{#    {% endblock %}#}
+{#</script>#}
+
 {% block content %}
-    <p>{{ object.embed_code|safe }}</p>
+    <div class="well">
+        <h1>{{ object.title }}</h1>
+    </div>
+    <!-- 16:9 aspect ratio -->
+    <div class="embed-responsive embed-responsive-16by9">
+        <p>{{ object.embed_code|safe }}</p>
+    </div>
 
-    <a href="https://twitter.com/home?status={{ object.get_share_message|safe }}">
-        <i class="fa fa-twitter-square fa-3x"></i>
-    </a>
+    <div class="well">
+        <div class="container">
+            <p class="col-sm-8 col-sm-offset-9">
+                <a href="https://twitter.com/home?status={{ object.get_share_message|safe }}">
+                    <i class="fa fa-twitter-square fa-3x"></i>
+                </a>
 
-    <a href="https://facebook.com/sharer/sharer.php?u={{ object.get_share_link|safe }}">
-        <i class="fa fa-facebook-square fa-3x"></i>
-    </a>
+                <a href="https://facebook.com/sharer/sharer.php?u={{ object.get_share_link|safe }}">
+                    <i class="fa fa-facebook-square fa-3x"></i>
+                </a>
 
-    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ object.get_share_link|safe }}/&title={{ object.get_share_message|safe }}&summary={{ object.get_share_message|safe }}&source={{ object.get_share_link|safe }}/">
-        <i class="fa fa-linkedin-square fa-3x"></i>
-    </a>
+                <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ object.get_share_link|safe }}/&title={{ object.get_share_message|safe }}&summary={{ object.get_share_message|safe }}&source={{ object.get_share_link|safe }}/">
+                    <i class="fa fa-linkedin-square fa-3x"></i>
+                </a>
+            </p>
+        </div>
+    </div>
 
 {% endblock %}

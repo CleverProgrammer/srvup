@@ -34,6 +34,16 @@
 </div>
 
 {% include 'javascript.html' %}
+
+<script>
+    $(document).ready(function(){
+        // alert('jquery working');
+        {% block jquery %}
+
+        {% endblock %}
+    })
+</script>
+
 </body>
 
 </html>
