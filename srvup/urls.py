@@ -22,9 +22,9 @@ from videos import views as video_views
 urlpatterns = [
     # url(r'^$', TemplateView.as_view(template_name='base.html'), name='home'),
     url(r'^staff/$', views.staff_home, name='staff'),
-    url(r'^videos/$', video_views.category_list, name='category_list'),
-    url(r'^videos/(?P<cat_slug>[\w-]+)/$', video_views.category_detail, name='category_detail'),
-    url(r'^videos/(?P<cat_slug>[\w-]+)/(?P<id>\d+)/$', video_views.video_detail, name='video_detail'),
+    url(r'^courses/$', video_views.category_list, name='category_list'),
+    url(r'^courses/(?P<cat_slug>[\w-]+)/$', video_views.category_detail, name='category_detail'),
+    url(r'^courses/(?P<cat_slug>[\w-]+)/(?P<id>\d+)/$', video_views.video_detail, name='video_detail'),
     url(r'^$', views.home, name='home'),
     url(r'^admin/', admin.site.urls),
 ]
