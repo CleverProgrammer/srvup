@@ -10,9 +10,15 @@
     {% endblock %}
 </style>
 
+<h1>hi</h1>
 {% block content %}
 
-    <h2>Total Videos: {{ number }}</h2>
+    <form action="" method="POST"> {% csrf_token %}
+        {{ form.as_p }}
+        <input class="btn btn-default" type="submit" value="Register">
+    </form>
+
+{#    <h2>Total Videos: {{ number }}</h2>#}
     {% for video in videos %}
         <p>
             {#            <a href="{% url 'video_detail' id=video.id %}">{{ forloop.counter }}. {{ video }}</a> <br>#}

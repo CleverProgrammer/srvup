@@ -76,3 +76,16 @@ class MyUser(AbstractBaseUser):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
         return self.is_admin
+
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(MyUser)
+    profile_picture = models.ImageField(upload_to='images/', null=True, blank=True)
+    bio = models.TextField(null=True, blank=True)
+    facebook_link = models.CharField(max_length=255, null=True, blank=True,
+                                     verbose_name='Facebook profile url')
+    twitter_handle = models.CharField(max_length=255, null=True, blank=True,
+                                     verbose_name='Twitter handle')
+
+    def __str__(self):
+        return self.user.username
