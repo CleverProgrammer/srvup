@@ -28,7 +28,7 @@ class RegisterForm(forms.Form):
         except MyUser.DoesNotExist:
             return username
         except:
-            forms.ValidationError("There was an error, please try again or contact us")
+            raise forms.ValidationError("There was an error, please try again or contact us")
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
@@ -38,7 +38,7 @@ class RegisterForm(forms.Form):
         except MyUser.DoesNotExist:
             return email
         except:
-            forms.ValidationError("There was an error, please try again or contact us")
+            raise forms.ValidationError("There was an error, please try again or contact us")
 
 
 class UserCreationForm(forms.ModelForm):

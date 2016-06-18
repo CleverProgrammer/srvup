@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
+from django.db.models.signals import post_save
 
 
 class MyUserManager(BaseUserManager):
@@ -89,3 +90,13 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.user.username
+
+def new_user_reveiver(sender, instance, created, *args, **kwargs):
+    if created:
+        new_profile, is_created = UserProfile.objects.get_or_create(user=instance)
+        print('**', new_profile, is_created)
+        # merchant account customer id -- stripe vs. braintree
+        # send email for verifying user email
+        # can also nag user for completing profile
+
+post_save.connect(new_user_reveiver, sender=MyUser)

@@ -1,5 +1,5 @@
 from django.contrib.auth import authenticate, login, logout
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import render, HttpResponseRedirect, redirect
 from django.contrib.auth.decorators import login_required
 from django.utils.safestring import mark_safe
 
@@ -27,6 +27,11 @@ def home(request):
         new_user.email = email
         new_user.set_password(password)
         new_user.save()
+        return redirect('login')
+        # return HttpResponseRedirect(reverse('login'))
+        # email user
+        # create user profile instance
+
 
     # name = 'Rafeh Qazi'
     # videos = Video.objects.get_featured()
@@ -59,7 +64,7 @@ def auth_login(request):
         user = authenticate(username=username, password=password)
         if user:
             login(request, user)
-            return HttpResponseRedirect(next_url)
+            return redirect('home')
     context = {'form': form}
     return render(request, 'login.html', context)
 
