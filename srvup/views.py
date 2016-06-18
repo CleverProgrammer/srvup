@@ -27,6 +27,7 @@ def home(request):
         new_user.email = email
         new_user.set_password(password)
         new_user.save()
+        # Add message for success
         return redirect('login')
         # return HttpResponseRedirect(reverse('login'))
         # email user
