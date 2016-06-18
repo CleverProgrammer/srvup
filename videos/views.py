@@ -31,8 +31,9 @@ def category_detail(request, cat_slug):
     try:
         context = {}
         cat = Category.objects.get(slug=cat_slug)
-        context['object'] = Video.objects.get(id=id)
-        return render(request, 'videos/category_detail.html', context)
+        context['object'] = cat
+        context['queryset'] = cat.video_set.all()
+        return render(request, 'videos/video_list.html', context)
     except:
         raise Http404
 

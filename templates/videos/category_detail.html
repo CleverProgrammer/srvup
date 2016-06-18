@@ -4,8 +4,7 @@
 
 {% block content %}
     {% for video in queryset %}
-        <p><a href="{{ video.get_absolute_url }}">{{ forloop.counter }}. {{ video.title }}</a></p>
-{#        <p>{{ video.embed_code|safe }}</p>#}
+        <p>{{ video.embed_code|safe }}</p>
     {% endfor %}
 
 {% endblock %}
