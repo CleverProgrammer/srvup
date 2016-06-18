@@ -32,6 +32,7 @@ class Video(models.Model):
     category = models.ForeignKey("Category", null=True)
     timestamp = models.DateTimeField(auto_now_add=True, null=True)
     updated = models.DateTimeField(auto_now=True, null=True)
+    objects = VideoManager()
 
     def __str__(self):
         return self.title
