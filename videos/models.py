@@ -29,7 +29,7 @@ class Video(models.Model):
     active = models.BooleanField(default=True)
     featured = models.BooleanField(default=False)
     free_preview = models.BooleanField(default=False)
-    category = models.ForeignKey("Category", null=True)
+    # category = models.ForeignKey("Category", null=True)
     timestamp = models.DateTimeField(auto_now_add=True, null=True)
     updated = models.DateTimeField(auto_now=True, null=True)
     objects = VideoManager()
@@ -42,7 +42,11 @@ class Video(models.Model):
 
 
 class Category(models.Model):
+    class Meta:
+        verbose_name_plural = 'Categories'
+
     title = models.CharField(max_length=120)
+    videos = models.ManyToManyField(Video, blank=True)
     description = models.TextField(max_length=5000, blank=True, null=True)
     image = models.ImageField(upload_to='images/', null=True, blank=True)
     active = models.BooleanField(default=True)
