@@ -28,6 +28,8 @@ DEBUG = True
 ALLOWED_HOSTS = []
 FULL_DOMAIN_NAME = 'https://www.cleverprogrammer.com'
 
+AUTH_USER_MODEL = 'accounts.MyUser'
+
 LOGIN_URL = '/login/'
 # Application definition
 
