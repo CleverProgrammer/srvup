@@ -29,7 +29,7 @@ class Video(models.Model):
     active = models.BooleanField(default=True)
     featured = models.BooleanField(default=False)
     free_preview = models.BooleanField(default=False)
-    category = models.ForeignKey("Category", null=True)
+    category = models.ForeignKey("Category")
     timestamp = models.DateTimeField(auto_now_add=True, null=True)
     updated = models.DateTimeField(auto_now=True, null=True)
     objects = VideoManager()
@@ -56,3 +56,6 @@ class Category(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse(viewname='category_detail', kwargs={'cat_slug': self.category.slug})
