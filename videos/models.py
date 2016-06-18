@@ -30,7 +30,7 @@ class VideoManager(models.Manager):
         return self.get_queryset().active()
 
 
-DEFAULT_MESSAGE = """Check out this awesome video. """
+DEFAULT_MESSAGE = "Check out this awesome video."
 
 
 class Video(models.Model):
