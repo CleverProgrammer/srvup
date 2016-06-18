@@ -46,9 +46,9 @@ class Category(models.Model):
         verbose_name_plural = 'Categories'
 
     title = models.CharField(max_length=120)
-    # videos = models.ManyToManyField(Video, blank=True)
     description = models.TextField(max_length=5000, blank=True, null=True)
     image = models.ImageField(upload_to='images/', null=True, blank=True)
+    slug = models.SlugField(unique=True)
     active = models.BooleanField(default=True)
     featured = models.BooleanField(default=False)
     timestamp = models.DateTimeField(auto_now_add=True)
