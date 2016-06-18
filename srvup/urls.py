@@ -24,7 +24,7 @@ urlpatterns = [
     url(r'^staff/$', views.staff_home, name='staff'),
     url(r'^courses/$', video_views.category_list, name='category_list'),
     url(r'^courses/(?P<cat_slug>[\w-]+)/$', video_views.category_detail, name='category_detail'),
-    url(r'^courses/(?P<cat_slug>[\w-]+)/(?P<id>\d+)/$', video_views.video_detail, name='video_detail'),
+    url(r'^courses/(?P<cat_slug>[\w-]+)/(?P<vid_slug>[\w-]+)/$', video_views.video_detail, name='video_detail'),
     url(r'^$', views.home, name='home'),
     url(r'^admin/', admin.site.urls),
 ]

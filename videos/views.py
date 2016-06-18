@@ -7,14 +7,14 @@ from .models import Video, Category
 # Create your views here.
 
 @login_required
-def video_detail(request, cat_slug, id):
+def video_detail(request, cat_slug, vid_slug):
     try:
         cat = Category.objects.get(slug=cat_slug)
     except:
         raise Http404
     try:
         context = {}
-        context['object'] = Video.objects.get(id=id)
+        context['object'] = Video.objects.get(slug=vid_slug)
         return render(request, 'videos/video_detail.html', context)
     except:
         raise Http404
