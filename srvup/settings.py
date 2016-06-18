@@ -26,6 +26,7 @@ SECRET_KEY = '#7k&k=hadg3)3xfe%_slx=e^v=!8v++q9v2^0g-v!lewa22h6&'
 DEBUG = True
 
 ALLOWED_HOSTS = []
+FULL_DOMAIN_NAME = 'http://www.cleverprogrammer-videos.com'
 
 LOGIN_URL = '/login/'
 # Application definition

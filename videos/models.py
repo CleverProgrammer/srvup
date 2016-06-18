@@ -1,4 +1,7 @@
+from urllib import parse
+
 from django.core.urlresolvers import reverse
+from django.conf import settings
 from django.db import models
 from django.db.models.signals import post_save
 from django.utils.text import slugify
@@ -27,9 +30,13 @@ class VideoManager(models.Manager):
         return self.get_queryset().active()
 
 
+DEFAULT_MESSAGE = """Check out this awesome video. """
+
+
 class Video(models.Model):
     title = models.CharField(max_length=120)
     embed_code = models.CharField(max_length=500, blank=True, null=True)
+    share_message = models.TextField(default=DEFAULT_MESSAGE)
     slug = models.SlugField(null=True, blank=True)
     active = models.BooleanField(default=True)
     featured = models.BooleanField(default=False)
@@ -52,6 +59,14 @@ class Video(models.Model):
     def save(self, **kwargs):
         unique_slugify(self, self.title)
         super(Video, self).save(**kwargs)
+
+    def get_share_link(self):
+        full_url = '{}{}'.format(settings.FULL_DOMAIN_NAME, self.get_absolute_url())
+        return full_url
+
+    def get_share_message(self):
+        full_url = '{}{}'.format(settings.FULL_DOMAIN_NAME, self.get_absolute_url())
+        return parse.quote('{} {}'.format(self.share_message, full_url))
 
 
 # def video_post_save_receiver(sender, instance, created, *args, **kwargs):

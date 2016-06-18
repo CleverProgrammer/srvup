@@ -3,5 +3,16 @@
 {% block title %} Video | {% endblock %}
 
 {% block content %}
-    {{ object.embed_code|safe }}
+    <p>{{ object.embed_code|safe }}</p>
+
+    <a href="https://twitter.com/home?status={{ object.get_share_message|safe }}">
+        <span class="fa fa-twitter"></span> Share Video
+    </a>
+
+    <br>
+
+    <a href="https://facebook.com/sharer/sharer.php?u={{ object.get_share_link|safe }}">
+        <span class="fa fa-facebook"></span> Share Video
+    </a>
+
 {% endblock %}

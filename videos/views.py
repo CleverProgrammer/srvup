@@ -15,6 +15,7 @@ def video_detail(request, cat_slug, vid_slug):
     try:
         context = {}
         context['object'] = Video.objects.get(slug=vid_slug)
+        print(context)
         return render(request, 'videos/video_detail.html', context)
     except:
         raise Http404
