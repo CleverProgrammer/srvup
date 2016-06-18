@@ -26,6 +26,7 @@ class VideoManager(models.Manager):
 class Video(models.Model):
     title = models.CharField(max_length=120)
     embed_code = models.CharField(max_length=500, blank=True, null=True)
+    slug = models.SlugField(null=True, blank=True)
     active = models.BooleanField(default=True)
     featured = models.BooleanField(default=False)
     free_preview = models.BooleanField(default=False)
@@ -33,6 +34,9 @@ class Video(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True, null=True)
     updated = models.DateTimeField(auto_now=True, null=True)
     objects = VideoManager()
+
+    class Meta:
+        unique_together = ('slug', 'category')
 
     def __str__(self):
         return self.title
