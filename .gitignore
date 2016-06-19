@@ -146,3 +146,5 @@ tags
 
 # Created by .ignore support plugin (hsz.mobi)
 db.sqlite3
+
+srvup/database_config.py
