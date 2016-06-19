@@ -3,5 +3,8 @@
 {% block title %} Video | {% endblock %}
 
 {% block content %}
-    {{ queryset }}
+    {% for item in queryset %}
+        <p><a href="{{ item.get_absolute_url }}">{{ item }}</a></p>
+    {% endfor %}
+
 {% endblock %}

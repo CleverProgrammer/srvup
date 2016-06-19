@@ -1,6 +1,8 @@
 from django.shortcuts import render, Http404
 from django.contrib.auth.decorators import login_required
 
+from comments.models import Comment
+
 from .models import Video, Category
 
 
@@ -29,11 +31,15 @@ def category_list(request):
 
 @login_required
 def category_detail(request, cat_slug):
+    path = request.get_full_path()
+    comments = Comment.objects.filter(path=path)
+    print(comments)
     try:
         context = {}
         cat = Category.objects.get(slug=cat_slug)
         context['object'] = cat
         context['queryset'] = cat.video_set.all()
+        context['comments'] = comments
         return render(request, 'videos/video_list.html', context)
     except:
         raise Http404
