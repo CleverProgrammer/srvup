@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load humanize %}
 
 {% block title %} Video | {% endblock %}
 
@@ -80,14 +81,14 @@
                         <div class="well">
                             <p style="font-size: 1.3em;"> {{ comment.text }} </p>
                             <p style="font-size: 0.9em;">
-                                by {{ comment.user.username }} on {{ comment.timestamp }}
+                                by <strong>{{ comment.user.username }}</strong> {{ comment.timestamp|naturaltime }}
                             </p>
                             {% if not comment.is_child %}
 
                                 <ul>
                                     {% for child in comment.get_children %}
                                         <li>{{ child }} &nbsp; &nbsp;- <strong>{{ child.user }}</strong>
-                                            on {{ child.timestamp }}
+                                            {{ child.timestamp|naturaltime }}
                                         </li>
                                     {% endfor %}
                                 </ul>
