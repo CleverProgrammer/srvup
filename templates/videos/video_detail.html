@@ -91,14 +91,21 @@
                                             {{ child.timestamp|naturaltime }}
                                         </li>
                                     {% endfor %}
+                                    <li>
+                                        <form action="" method="POST">{% csrf_token %}
+                                            <input type="hidden" name="parent_id" value="{{ comment.id }}"/>
+                                            {{ comment_form.as_p }}
+                                            <input type="submit" value="Reply"/>
+                                        </form>
+                                    </li>
                                 </ul>
 
                             {% endif %}
-                            {#                        <form action="{% url 'comment_delete' comment_id=comment.id %}" method="POST">{% csrf_token %}#}
-                            {#                            <button type="submit" class="btn btn-danger col-sm-offset-10" value="Delete Comment">#}
-                            {#                                Delete Comment#}
-                            {#                            </button>#}
-                            {#                        </form>#}
+                            <form action="" method="POST">{% csrf_token %}
+                                <button type="submit" class="btn btn-danger col-sm-offset-10" name='delete_comment' value="{{ comment.id }}">
+                                    Delete Comment
+                                </button>
+                            </form>
                         </div>
                     </div>
                 {% endfor %}

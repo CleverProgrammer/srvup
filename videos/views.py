@@ -20,12 +20,24 @@ def video_detail(request, cat_slug, vid_slug):
     try:
         context = {}
         video = Video.objects.get(slug=vid_slug)
+        if request.POST.get('delete_comment'):
+            comment = Comment.objects.get(id=request.POST.get('delete_comment'))
+            comment.delete()
+            return HttpResponseRedirect(video.get_absolute_url())
         context['object'] = video
         context['comments'] = video.comment_set.all()
         comment_form = CommentForm(request.POST or None)
         print(request.POST)
         if comment_form.is_valid():
-            comment_text = comment_form.cleaned_data['text']
+            parent_id = request.POST.get('parent_id')
+            print(parent_id)
+            if parent_id is not None:
+                try:
+                    parent_comment = Comment.objects.get(id=parent_id)
+                    print(parent_comment)
+                except:
+                    parent_comment = None
+            comment_text = comment_form.cleaned_data['comment']
             new_comment = Comment.objects.create_comment(
                 user=request.user,
                 path=request.get_full_path(),

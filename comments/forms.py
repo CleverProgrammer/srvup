@@ -8,4 +8,4 @@ from .models import Comment
 #         fields = ('text',)
 
 class CommentForm(forms.Form):
-    text = forms.CharField(widget=forms.Textarea)
+    comment = forms.CharField(widget=forms.Textarea)
