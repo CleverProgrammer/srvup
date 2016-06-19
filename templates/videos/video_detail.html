@@ -68,6 +68,11 @@
     <div class="row">
         <div class="col-sm-12">
             <h1>Comments/Questions</h1>
+            <form action="" method="POST">{% csrf_token %}
+                {{ comment_form.as_p }}
+                <input type="submit" value="Add comment">
+            </form>
+
             {% for comment in comments %}
                 <div class="container">
                     <div class="well">
