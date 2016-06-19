@@ -16,22 +16,23 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.views.generic import TemplateView
-from srvup import views
+from srvup import views as srvup_views
+from accounts import views as account_views
 from videos import views as video_views
 
 urlpatterns = [
     # url(r'^$', TemplateView.as_view(template_name='base.html'), name='home'),
-    url(r'^staff/$', views.staff_home, name='staff'),
+    url(r'^staff/$', srvup_views.staff_home, name='staff'),
     url(r'^courses/$', video_views.category_list, name='category_list'),
     url(r'^courses/(?P<cat_slug>[\w-]+)/$', video_views.category_detail, name='category_detail'),
     url(r'^courses/(?P<cat_slug>[\w-]+)/(?P<vid_slug>[\w-]+)/$', video_views.video_detail, name='video_detail'),
-    url(r'^$', views.home, name='home'),
+    url(r'^$', srvup_views.home, name='home'),
     url(r'^admin/', admin.site.urls),
 ]
 
 # Auth login/logout
 
 urlpatterns += [
-    url(r'^login/$', views.auth_login, name='login'),
-    url(r'^logout/$', views.auth_logout, name='logout'),
+    url(r'^login/$', account_views.auth_login, name='login'),
+    url(r'^logout/$', account_views.auth_logout, name='logout'),
 ]

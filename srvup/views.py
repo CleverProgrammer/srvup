@@ -8,8 +8,6 @@ from accounts.models import MyUser
 
 from videos.models import Video
 
-from .forms import LoginForm
-
 
 def home(request):
     # print(request.user)
@@ -54,22 +52,3 @@ def staff_home(request):
     context = {}
     return render(request, 'home.html', context)
 
-
-def auth_login(request):
-    form = LoginForm(request.POST or None)
-    next_url = request.GET.get('next')
-    if form.is_valid():
-        username = form.cleaned_data['username']
-        password = form.cleaned_data['password']
-        # print(username, password)
-        user = authenticate(username=username, password=password)
-        if user:
-            login(request, user)
-            return redirect('home')
-    context = {'form': form}
-    return render(request, 'login.html', context)
-
-
-def auth_logout(request):
-    logout(request)
-    return HttpResponseRedirect('/')
