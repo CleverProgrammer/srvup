@@ -7,14 +7,14 @@ from videos.models import Video
 
 
 class CommentManager(models.Manager):
-    def create_comment(self, user=None, comment=None, path=None, video=None):
+    def create_comment(self, user=None, text=None, path=None, video=None):
         if not path:
             raise ValueError('Must include a path when adding a comment')
 
         if not user:
             raise ValueError('Must include a user when adding a comment')
 
-        comment = self.model(user=user, path=path, comment=comment)
+        comment = self.model(user=user, path=path, text=text)
 
         if video:
             comment.video = video
@@ -36,4 +36,4 @@ class Comment(models.Model):
     objects = CommentManager()
 
     def __str__(self):
-        return self.user.username
+        return self.text
