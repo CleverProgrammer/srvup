@@ -39,29 +39,19 @@
                 update_iframe_size();
             });
     {% endblock %}
+
 </script>
 
+
 {% block content %}
+
     {% for video in queryset %}
         <div class="container">
-            <div id="youtubeVideo" class="col-sm-12">
+            <div id="youtubeVideo" class="col-sm-8">
                 <p><a href="{{ video.get_absolute_url }}">{{ forloop.counter }}. {{ video }}</a></p>
                 {{ video.embed_code|safe }}
             </div>
         </div>
     {% endfor %}
-
-    {% for comment in comments %}
-        <div class="container">
-            <div class="well col-sm-12">
-                <p style="font-size: 1.3em;"> {{ comment.text }} </p>
-                <p style="font-size: 0.9em;">
-                    by {{ comment.user.username }} on {{ comment.timestamp }}
-                </p>
-            </div>
-        </div>
-
-    {% endfor %}
-
 
 {% endblock %}

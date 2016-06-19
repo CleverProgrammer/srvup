@@ -42,30 +42,42 @@
 </script>
 
 {% block content %}
-    <div class="well">
-        <h1>{{ object.title }}</h1>
+    <div class="container row">
+        <h3>{{ object.title }}</h3>
+        <p>
+            <a href="https://twitter.com/home?status={{ object.get_share_message|safe }}">
+                <i class="fa fa-twitter-square fa-3x"></i>
+            </a>
+
+            <a href="https://facebook.com/sharer/sharer.php?u={{ object.get_share_link|safe }}">
+                <i class="fa fa-facebook-square fa-3x"></i>
+            </a>
+
+            <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ object.get_share_link|safe }}/&title={{ object.get_share_message|safe }}&summary={{ object.get_share_message|safe }}&source={{ object.get_share_link|safe }}/">
+                <i class="fa fa-linkedin-square fa-3x"></i>
+            </a>
+        </p>
     </div>
     <!-- 16:9 aspect ratio -->
     <div id="youtubeVideo">
         {{ object.embed_code|safe }}
     </div>
 
-    <div class="well">
-        <div class="container">
-            <p class="col-sm-8 col-sm-offset-9">
-                <a href="https://twitter.com/home?status={{ object.get_share_message|safe }}">
-                    <i class="fa fa-twitter-square fa-3x"></i>
-                </a>
+    <hr>
 
-                <a href="https://facebook.com/sharer/sharer.php?u={{ object.get_share_link|safe }}">
-                    <i class="fa fa-facebook-square fa-3x"></i>
-                </a>
-
-                <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ object.get_share_link|safe }}/&title={{ object.get_share_message|safe }}&summary={{ object.get_share_message|safe }}&source={{ object.get_share_link|safe }}/">
-                    <i class="fa fa-linkedin-square fa-3x"></i>
-                </a>
-            </p>
+    <div class="row">
+        <div class="col-sm-12">
+            <h1>Comments/Questions</h1>
+            {% for comment in comments %}
+                <div class="container">
+                    <div class="well">
+                        <p style="font-size: 1.3em;"> {{ comment.text }} </p>
+                        <p style="font-size: 0.9em;">
+                            by {{ comment.user.username }} on {{ comment.timestamp }}
+                        </p>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
     </div>
-
 {% endblock %}

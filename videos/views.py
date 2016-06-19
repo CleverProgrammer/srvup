@@ -10,14 +10,17 @@ from .models import Video, Category
 
 @login_required
 def video_detail(request, cat_slug, vid_slug):
+    path = request.get_full_path()
     try:
         cat = Category.objects.get(slug=cat_slug)
     except:
         raise Http404
     try:
         context = {}
-        context['object'] = Video.objects.get(slug=vid_slug)
-        print(context)
+        video = Video.objects.get(slug=vid_slug)
+        context['object'] = video
+        context['comments'] = video.comment_set.all()
+        # context['comments'] = Comment.objects.filter(video=context['object'])
         return render(request, 'videos/video_detail.html', context)
     except:
         raise Http404
@@ -31,15 +34,11 @@ def category_list(request):
 
 @login_required
 def category_detail(request, cat_slug):
-    path = request.get_full_path()
-    comments = Comment.objects.filter(path=path)
-    print(comments)
     try:
         context = {}
         cat = Category.objects.get(slug=cat_slug)
         context['object'] = cat
         context['queryset'] = cat.video_set.all()
-        context['comments'] = comments
         return render(request, 'videos/video_list.html', context)
     except:
         raise Http404
