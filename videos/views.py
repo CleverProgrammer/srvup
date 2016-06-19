@@ -21,7 +21,7 @@ def video_detail(request, cat_slug, vid_slug):
         context = {}
         video = Video.objects.get(slug=vid_slug)
         context['object'] = video
-        context['comments'] = video.comment_set.all()
+        context['comments'] = video.comment_set.all().order_by('-timestamp')
         comment_form = CommentForm(request.POST or None)
         print(request.POST)
         if comment_form.is_valid():
@@ -31,8 +31,8 @@ def video_detail(request, cat_slug, vid_slug):
                 path=request.get_full_path(),
                 text=comment_text,
                 video=video)
+            # TODO: Add comment thread and show that thread with a message
             return HttpResponseRedirect(video.get_absolute_url())
-        # context['comments'] = Comment.objects.filter(video=context['object'])
         context['comment_form'] = comment_form
         return render(request, 'videos/video_detail.html', context)
     except:
