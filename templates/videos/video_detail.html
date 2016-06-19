@@ -101,11 +101,16 @@
                                 </ul>
 
                             {% endif %}
-                            <form action="" method="POST">{% csrf_token %}
-                                <button type="submit" class="btn btn-danger col-sm-offset-10" name='delete_comment' value="{{ comment.id }}">
-                                    Delete Comment
-                                </button>
-                            </form>
+
+                            {% if request.user == comment.user %}
+                                <form action="" method="POST">{% csrf_token %}
+                                    <button type="submit" class="btn btn-danger col-sm-offset-10" name='delete_comment'
+                                            value="{{ comment.id }}">
+                                        Delete Comment
+                                    </button>
+                                </form>
+                            {% endif %}
+
                         </div>
                     </div>
                 {% endfor %}
