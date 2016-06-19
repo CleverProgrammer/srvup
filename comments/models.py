@@ -39,6 +39,9 @@ class Comment(models.Model):
 
     objects = CommentManager()
 
+    class Meta:
+        ordering = ('-timestamp',)
+
     def __str__(self):
         return self.text
 

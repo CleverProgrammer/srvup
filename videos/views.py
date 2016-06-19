@@ -21,7 +21,7 @@ def video_detail(request, cat_slug, vid_slug):
         context = {}
         video = Video.objects.get(slug=vid_slug)
         context['object'] = video
-        context['comments'] = video.comment_set.all().order_by('-timestamp')
+        context['comments'] = video.comment_set.all()
         comment_form = CommentForm(request.POST or None)
         print(request.POST)
         if comment_form.is_valid():
